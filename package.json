@@ -1,0 +1,14 @@
+{
+  "name": "聚宝仙盆之杂灵根才是真 BOSS",
+  "type": "module",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "node dev-server.js",
+    "update_pot": "pybabel extract -F lang/babel.cfg -c \"TRANSLATORS\" script -o lang/adarkroom.pot"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}

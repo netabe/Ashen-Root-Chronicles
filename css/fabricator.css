@@ -1,0 +1,42 @@
+div#fabricateButtons {
+  position: relative;
+  top: 5px;
+	left: 0;
+}
+
+div#fabricateButtons::before {
+	content: attr(data-legend);
+	position: relative;
+	top: -5px;
+}
+
+div#blueprints::before {
+  content: attr(data-legend);
+	position: absolute;
+	top: -12px;
+	background-color: #0a0806;
+	padding: 0 6px;
+	font-weight: bold;
+	color: #c8a84a;
+}
+
+div#blueprints {
+	position: absolute;
+	top: 0px;
+	right: 237px;
+	border: 2px solid #2a221a;
+	border-radius: 5px;
+	cursor: default;
+	padding: 10px 12px;
+	width: 200px;
+	background: rgba(8, 6, 4, 0.75);
+	box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+div.blueprintRow {
+	position: relative;
+}
+
+div.blueprintRow .row_key {
+	float: none;
+}

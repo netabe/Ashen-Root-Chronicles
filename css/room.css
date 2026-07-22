@@ -1,0 +1,69 @@
+div#buildBtns {
+	position: absolute;
+	top: 50px;
+	left: 0px;
+}
+
+div#buildBtns:before, div#craftBtns:before, div#buyBtns:before {
+	content: attr(data-legend);
+	position: relative;
+	top: -5px;
+}
+
+div#craftBtns {
+	position: absolute;
+	top: 50px;
+	left: 150px;
+}
+
+div#buyBtns {
+	position: absolute;
+	top: 50px;
+	left: 300px;
+}
+
+div#storesContainer {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+}
+
+div#stores:before, div#weapons:before {
+	position: absolute;
+	background: #0a0806;
+	content: attr(data-legend);
+	left: 8px;
+	top: -12px;
+	padding: 0 6px;
+	font-weight: bold;
+	color: #c8a84a;
+}
+
+div#stores {
+	position: relative;
+	z-index:10;
+	border: 2px solid #2a221a;
+	border-radius: 5px;
+	cursor: default;
+	padding: 10px 12px;
+	width: 200px;
+	background: rgba(8, 6, 4, 0.75);
+	box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}
+
+div.storeRow {
+	position: relative;
+}
+
+div#weapons {
+	margin-top: 15px;
+	position: relative;
+	right: 0px;
+	border: 2px solid #2a221a;
+	border-radius: 5px;
+	cursor: default;
+	padding: 10px 12px;
+	width: 200px;
+	background: rgba(8, 6, 4, 0.75);
+	box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.3);
+}

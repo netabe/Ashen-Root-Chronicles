@@ -1,0 +1,1149 @@
+body, .tooltip, select.menuBtn {
+	font-family: "Noto Serif SC", "Source Han Serif SC", "STSong", "SimSun", "Times New Roman", Times, serif;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 1.7;
+	letter-spacing: 0.03em;
+}
+
+html {
+	height: 100%;
+}
+
+body {
+	height: 100%;
+	margin: 0;
+	background-color: #060504;
+	background-image: url('../img/background.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+	color: #c8b89a;
+}
+
+::selection {
+	background-color: rgba(200, 168, 74, 0.35);
+}
+
+::-moz-selection {
+	background-color: rgba(200, 168, 74, 0.35);
+}
+
+#description textarea::selection {
+	background-color: rgba(200, 168, 74, 0.25);
+}
+
+#description textarea::-moz-selection {
+	background-color: rgba(200, 168, 74, 0.25);
+}
+
+div.clear {
+	clear: both;
+}
+
+div#wrapper {
+	margin: auto;
+	max-width: 700px;
+	padding: 20px 0 0 220px;
+	position: relative;
+}
+
+div#saveNotify {
+	position: fixed;
+	top: 12px;
+	right: 20px;
+	background: rgba(8, 6, 4, 0.95);
+	border: 1px solid #6b5c3e;
+	border-radius: 3px;
+	padding: 4px 12px;
+	color: #c8a84a;
+	opacity: 0;
+	font-size: 13px;
+	z-index: 50;
+}
+
+div#content {
+	position: relative;
+	overflow: hidden;
+	height: 700px;
+	border: 2px solid #2a221a;
+	border-radius: 5px;
+	background: rgba(10, 8, 6, 0.75);
+	box-shadow: inset 0 0 80px rgba(0, 0, 0, 0.6), 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+div#header {
+	padding: 10px 0 14px 18px;
+	height: 24px;
+	background: linear-gradient(to bottom, rgba(40, 28, 18, 0.5), transparent);
+	border-bottom: 2px solid #2a221a;
+	position: relative;
+}
+
+div#header:after {
+	content: '';
+	position: absolute;
+	bottom: -2px;
+	left: 0;
+	width: 100%;
+	height: 1px;
+	background: rgba(107, 92, 62, 0.3);
+}
+
+.logo {
+  position: fixed;
+  left: 10px;
+  bottom: 0;
+  z-index: 10;
+}
+
+.logo-icon {
+  height: 40px;
+}
+
+.logo-icon > path {
+  stroke: #5a4c38;
+}
+
+.menu {
+	position: fixed;
+	left: 10px;
+	bottom: 10px;
+	color: #a09078;
+	z-index: 10;
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 1px;
+	background: rgba(8, 6, 4, 0.92);
+	padding: 4px 6px;
+	border-radius: 5px;
+	border: 1px solid #3a3024;
+	box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5), inset 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.menu span {
+	cursor: pointer;
+	padding: 3px 10px;
+	border-radius: 3px;
+	transition: all 0.2s ease;
+	font-size: 13px;
+	white-space: nowrap;
+	border: 1px solid transparent;
+	color: #8a7a60;
+}
+
+.menu span:hover {
+	background: rgba(107, 92, 62, 0.15);
+	color: #e8d48a;
+	border-color: rgba(107, 92, 62, 0.3);
+}
+
+/* (language selector removed - default is zh_cn) */
+
+.menu span:hover {
+	text-decoration: none;
+}
+
+.menu .appStore {
+	font-weight: bold;
+}
+
+div.headerButton {
+	font-size: 15px;
+	cursor: pointer;
+	float: left;
+	border-left: 1px solid #3a3024;
+	margin-left: 12px;
+	padding-left: 12px;
+	color: #8a7a60;
+	transition: all 0.2s ease;
+	position: relative;
+}
+
+div.headerButton:hover {
+	color: #e8d48a;
+	text-shadow: 0 0 6px rgba(200, 168, 74, 0.25);
+	text-decoration: none;
+}
+
+div.headerButton:first-child {
+	border-left: none;
+	margin-left: 0px;
+	padding-left: 0px;
+}
+
+div.headerButton.selected, div.headerButton.selected:hover {
+	cursor: default;
+	color: #e8d48a;
+	font-weight: bold;
+	text-shadow: 0 0 8px rgba(200, 168, 74, 0.2);
+}
+
+#headerDropdown {
+	display: none;
+	border-left: 1px solid #3a3024;
+	margin-left: 8px;
+	padding-left: 8px;
+	position: relative;
+}
+
+#headerDropdownList {
+	display: none;
+	position: fixed;
+	z-index: 200;
+	background: rgba(10, 8, 6, 0.97);
+	border: 1px solid #3a3024;
+	border-radius: 5px;
+	padding: 6px 0;
+	min-width: 120px;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+}
+
+.headerDropdownItem {
+	padding: 8px 16px;
+	cursor: pointer;
+	color: #8a7a60;
+	font-size: 14px;
+	white-space: nowrap;
+	transition: all 0.15s ease;
+}
+
+.headerDropdownItem:hover {
+	color: #e8d48a;
+	background: rgba(200, 168, 74, 0.1);
+}
+
+.headerDropdownItem.selected {
+	color: #e8d48a;
+	font-weight: bold;
+}
+
+div#outerSlider {
+	position: absolute;
+}
+
+div#outerSlider > div {
+	position: relative;
+	float: left;
+	width: 700px;
+	height: 700px;
+	overflow: hidden;
+}
+
+div#locationSlider {
+	position: absolute;
+}
+
+div.location {
+	position: relative;
+	float: left;
+	width: 700px;
+}
+
+div.row_key {
+	clear: both;
+	float: left;
+}
+
+div.row_val {
+	float: right;
+}
+
+div.total {
+	font-weight: bold;
+}
+
+/* Notifications */
+
+div#notifications {
+	position: absolute;
+	top: 20px;
+	left: 0px;
+	height: 700px;
+	width: 200px;
+	overflow: hidden;
+}
+
+div#notifications div.notification {
+	margin-bottom: 8px;
+	padding: 5px 10px;
+	border-left: 3px solid #5a4c38;
+	background: rgba(10, 8, 6, 0.6);
+	border-radius: 0 4px 4px 0;
+	font-size: 14px;
+	color: #b0a080;
+}
+
+div#notifyGradient {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	height: 100%;
+	width: 100%;
+	background-color: #0a0806;
+	background: -webkit-linear-gradient(
+		rgba(10, 8, 6, 0) 0%, rgba(10, 8, 6, 1) 100%
+	);
+	background: linear-gradient(
+		rgba(10, 8, 6, 0) 0%, rgba(10, 8, 6, 1) 100%
+	);
+	pointer-events: none;
+}
+
+/* Button - WoW action bar style */
+
+div.button {
+	position: relative;
+	text-align: center;
+	border: 2px solid #3a3024;
+	border-radius: 4px;
+	width: 100px;
+	margin-bottom: 6px;
+	padding: 6px 10px;
+	cursor: pointer;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+	background: linear-gradient(to bottom, #1a1612, #100c0a);
+	transition: all 0.2s ease;
+	color: #c0a880;
+	box-shadow: inset 0 1px 0 rgba(107, 92, 62, 0.2), 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+div.button:hover {
+	background: linear-gradient(to bottom, #221c16, #14100c);
+	border-color: #5a4c38;
+	box-shadow: inset 0 1px 0 rgba(107, 92, 62, 0.3), 0 0 8px rgba(107, 92, 62, 0.15);
+	color: #e8d48a;
+	text-decoration: none;
+}
+
+div.button.disabled, div.button.disabled:hover {
+	cursor: default;
+	border-color: #2a221a;
+	color: #4a3a2a;
+	background: #0a0806;
+	box-shadow: none;
+	text-decoration: none;
+}
+
+div.button div.cooldown {
+	position: absolute;
+	top: -2px;
+	left: -2px;
+	z-index: 0;
+	height: calc(100% + 4px);
+	border-radius: 3px;
+	width: 0%;
+	background: linear-gradient(to right, rgba(200, 168, 74, 0.5), rgba(160, 128, 48, 0.35));
+	pointer-events: none;
+}
+
+div.button .cooldownText {
+	position: absolute;
+	right: 5px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 11px;
+	color: #ffe;
+	z-index: 2;
+	display: none;
+	pointer-events: none;
+	text-shadow: 0 0 4px rgba(0,0,0,0.9), 0 0 8px rgba(0,0,0,0.5);
+	font-weight: bold;
+}
+
+div.button .buttonLabel {
+	position: relative;
+	z-index: 1;
+}
+
+/* Up/Down buttons */
+
+.upBtn, .dnBtn, .upManyBtn, .dnManyBtn {
+	position: absolute;
+	width: 14px;
+	height: 12px;
+	cursor: pointer;
+}
+
+.upBtn, .dnBtn {
+	right: 0px;
+}
+
+.upManyBtn, .dnManyBtn {
+	right: -15px;
+}
+
+.upBtn.disabled, .dnBtn.disabled, .upManyBtn.disabled, .dnManyBtn.disabled {
+	cursor: default;
+}
+
+.upBtn {
+	top: -3px;
+}
+
+.upManyBtn {
+	top: -3px;
+}
+
+.upBtn:after, .upBtn:before, .upManyBtn:after, .upManyBtn:before {
+	position: absolute;
+	border: medium solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	bottom: 2px;
+}
+
+.upBtn:after, .upManyBtn:after {
+	border-color: transparent transparent #0a0806;
+}
+
+.upBtn:before, .upManyBtn:before {
+	border-color: transparent transparent #8a7a50;
+}
+
+.upBtn.disabled:before, .upManyBtn.disabled:before {
+	border-color: transparent transparent #3a2a1a;
+}
+
+.dnBtn {
+	bottom: -3px;
+}
+
+.dnManyBtn {
+	bottom: -3px;
+}
+
+.dnBtn:after, .dnBtn:before, .dnManyBtn:after, .dnManyBtn:before {
+	position: absolute;
+	border: medium solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	top: 2px;
+}
+
+.upBtn:before, .dnBtn:before, .upManyBtn:before, .dnManyBtn:before {
+	border-width: 6px;
+	left: 50%;
+	margin-left: -6px;
+}
+
+.upBtn:after, .dnBtn:after {
+	border-width: 4px;
+	left: 50%;
+	margin-left: -4px;
+}
+
+.upManyBtn:after, .dnManyBtn:after {
+	border-width: 3px;
+	left: 50%;
+	margin-left: -3px;
+}
+
+.dnBtn:after, .dnManyBtn:after {
+	border-color: #0a0806 transparent transparent;
+}
+
+.dnBtn:before, .dnManyBtn:before {
+	border-color: #8a7a50 transparent transparent;
+}
+
+.dnBtn.disabled:before, .dnManyBtn.disabled:before {
+	border-color: #3a2a1a transparent transparent;
+}
+
+div.button div.tooltip {
+	width: 100px;
+}
+
+/* Tooltip */
+
+div.tooltip {
+	display: none;
+	padding: 6px 10px;
+	border: 1px solid #3a3024;
+	border-radius: 4px;
+	position: absolute;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5);
+	background: rgba(8, 6, 4, 0.97);
+	z-index: 999;
+	font-size: 14px;
+	color: #c0a880;
+}
+
+.tooltip.bottom {
+	top: 30px;
+}
+
+.tooltip.right {
+	left: 2px;
+}
+
+.tooltip.left {
+	right: 0px;
+}
+
+.tooltip.top {
+	bottom: 20px;
+}
+
+*:hover > div.tooltip {
+	display: block;
+}
+
+div.tooltip:hover {
+	display: none !important;
+}
+
+.disabled:hover > div.tooltip, .button.free:hover > div.tooltip {
+	display: none;
+}
+
+#event .button.disabled:hover > div.tooltip {
+	display: block;
+}
+
+/* Events */
+
+.eventPanel {
+	background: rgba(8, 6, 4, 0.97);
+	border: 2px solid #3a3024;
+	border-radius: 6px;
+	left: 240px;
+	padding: 24px;
+	position: absolute;
+	top: 80px;
+	width: 355px;
+	z-index: 20;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.6), inset 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+.eventPanel:before {
+	content: '';
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	border: 1px solid rgba(107, 92, 62, 0.12);
+	border-radius: 5px;
+	pointer-events: none;
+}
+
+.eventPanel:after {
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	right: 3px;
+	bottom: 3px;
+	content: " ";
+	border: 1px solid rgba(107, 92, 62, 0.06);
+	border-radius: 3px;
+	pointer-events: none;
+}
+
+.eventPanel .button {
+	float:left;
+	margin-right: 20px;
+}
+
+body.noMask .eventPanel {
+	background: rgba(8, 6, 4, 0.97);
+}
+
+body.noMask .eventPanel .button {
+	border-color: #3a3024;
+	color: #c0a880;
+}
+
+.eventTitle {
+	display: inline-block;
+	font-weight: bold;
+	position: absolute;
+	top: -12px;
+	font-size: 17px;
+	color: #e8d48a;
+	text-shadow: 0 0 8px rgba(200, 168, 74, 0.15);
+	padding: 0 8px;
+}
+
+body.noMask .eventTitle {
+	color: #e8d48a;
+}
+
+.eventTitle:after {
+	background-color: #0a0806;
+	bottom: 30%;
+	content: " ";
+	height: 8px;
+	left: 0;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+
+body.noMask .eventTitle:after {
+	background-color: #0a0806;
+}
+
+#description {
+	position: relative;
+	min-height: 100px;
+	color: #c0a880;
+}
+
+#description textarea {
+	width: 100%;
+	height: 225px;
+	background: rgba(8, 6, 4, 0.85);
+	color: #c0a880;
+	border: 1px solid #2a221a;
+	border-radius: 3px;
+	padding: 8px;
+	font-family: inherit;
+	font-size: 14px;
+}
+
+body.noMask #description {
+	color: #c0a880;
+}
+
+#description > div {
+	padding-bottom: 20px;
+}
+
+.take-all-button {
+	float: none;
+}
+
+#buttons > .button {
+	margin: 0 5px 5px;
+	margin-right: 15px;
+}
+
+/* Combat! */
+#description div.fighter {
+	padding: 0px;
+	position: absolute;
+	bottom: 15px;
+}
+
+#wanderer {
+	left: 25%;
+}
+
+#enemy {
+	right: 25%;
+}
+
+.hp {
+	position: absolute;
+	top: -15px;
+	margin-left: -50%;
+	color: #d44;
+}
+
+.fighter.shield > .label::before {
+	content: '(';
+	position: absolute;
+	left: -8px;
+}
+
+.fighter.shield > .label::after {
+	content: ')';
+	position: absolute;
+	right: -8px;
+}
+
+.fighter.energised > .label {
+	font-size: 2em;
+	font-weight: bold;
+	color: #e8d48a;
+}
+
+.fighter.meditation > .label {
+	font-size: 1.5em;
+	opacity: 0.4;
+}
+
+@keyframes exploding {
+	0% { transform: translate(0, 0); }
+	25% { transform: translate(-10px, 0); }
+	75% { transform: translate(10px, 0); }
+	100% { transform: translate(0, 0); }
+}
+
+.fighter.exploding > .label {
+	animation: exploding 200ms linear infinite;
+}
+
+.fighter.venomous > .label {
+	font-size: 1.5em;
+	font-weight: bold;
+}
+
+.fighter.enraged > .label {
+	font-size: 1.5em;
+	font-style: italic;
+}
+
+.fighter.boost > .label {
+	font-style: italic;
+}
+
+#description .bullet {
+	padding: 0px 20px 0px 20px;
+	bottom: 25px;
+	position: absolute;
+	height: 1px;
+	line-height: 1px;
+}
+
+.damageText {
+	position: absolute;
+	bottom: 15px;
+	left: 50%;
+	margin-left: -50%;
+	color: #e44;
+	font-weight: bold;
+}
+
+#lootButtons {
+	padding-bottom: 0px !important;
+	margin: 20px 0 5px 0;
+	position: relative;
+}
+
+#lootButtons:before {
+	content: attr(data-legend);
+	position: absolute;
+	top: -25px;
+	left: 0px;
+	color: #8a7a50;
+	font-weight: bold;
+}
+
+#dropMenu {
+	background: rgba(8, 6, 4, 0.97);
+	border: 2px solid #3a3024;
+	border-radius: 6px;
+	position: absolute;
+	z-index: 100;
+	padding: 8px;
+	text-align: left;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+	cursor: default;
+	color: #c0a880;
+}
+
+#dropMenu:before {
+	content: attr(data-legend);
+	border-bottom: 1px solid #3a3024;
+	display: block;
+	margin-bottom: 6px;
+	padding: 0px 8px 8px 8px;
+	font-weight: bold;
+	color: #e8d48a;
+}
+
+#dropMenu > div {
+	padding: 0px 8px 6px 8px;
+	cursor: pointer;
+}
+
+#dropMenu > div:hover {
+	background: rgba(107, 92, 62, 0.1);
+	border-radius: 3px;
+}
+
+/* ===== 响应式布局 ===== */
+
+/* 移动端通知切换按钮 */
+#notifToggle {
+	display: none;
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	z-index: 100;
+	background: rgba(8, 6, 4, 0.92);
+	border: 1px solid #3a3024;
+	border-radius: 4px;
+	padding: 4px 10px;
+	font-size: 12px;
+	cursor: pointer;
+	color: #8a7a60;
+}
+
+#notifToggle:hover {
+	color: #e8d48a;
+	border-color: #5a4c38;
+}
+
+body.notif-open #notifications {
+	display: block !important;
+}
+
+body.notif-open #notifToggle {
+	color: #e8d48a;
+	border-color: #5a4c38;
+}
+
+/* 平板 (768px–1023px) */
+@media (max-width: 1023px) {
+	div#wrapper {
+		padding: 20px 0 0 20px;
+	}
+
+	div#notifications {
+		width: 160px;
+		top: 20px;
+		left: 0;
+		height: 600px;
+	}
+
+	div#notifications div.notification {
+		font-size: 13px;
+		padding: 3px 8px;
+	}
+
+	div#content {
+		height: 600px;
+	}
+
+	div#outerSlider > div {
+		width: 100%;
+		max-width: 700px;
+		height: 600px;
+	}
+
+	div.location {
+		width: 100%;
+		max-width: 700px;
+	}
+
+	.eventPanel {
+		left: 180px;
+		width: 300px;
+		top: 60px;
+		padding: 18px;
+	}
+}
+
+/* 手机 (< 768px) */
+@media (max-width: 767px) {
+	body {
+		background-attachment: scroll;
+	}
+
+	#notifToggle {
+		display: block;
+	}
+
+	div#notifications {
+		display: none;
+		position: fixed;
+		top: 40px;
+		left: 0;
+		width: 100%;
+		height: auto;
+		max-height: 200px;
+		background: rgba(8, 6, 4, 0.97);
+		border: 1px solid #2a221a;
+		border-radius: 0;
+		z-index: 99;
+		overflow-y: auto;
+	}
+
+	div#notifyGradient {
+		display: none;
+	}
+
+	/* 缩放整体以适配移动端宽度 */
+	html, body {
+		overflow-x: hidden;
+		overflow-y: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* Header 可横向滚动 */
+	div#header {
+		display: flex;
+		flex-wrap: nowrap;
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: none;
+	}
+
+	div#header::-webkit-scrollbar {
+		display: none;
+	}
+
+	div#outerSlider > div {
+		overflow-y: auto;
+		overflow-x: hidden;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* 缩放补偿：增大字号和按钮尺寸，缩放后仍可读 */
+	body {
+		font-size: 22px;
+	}
+
+	div#header {
+		font-size: 18px;
+		height: 28px;
+		padding: 12px 0 12px 14px;
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.headerButton {
+		font-size: 16px;
+		flex-shrink: 0;
+		float: none;
+	}
+
+	#headerDropdownList {
+		font-size: 16px;
+		min-width: 140px;
+	}
+
+	.headerDropdownItem {
+		padding: 12px 18px;
+		font-size: 16px;
+	}
+
+	div.button {
+		font-size: 18px;
+		padding: 12px 16px;
+		width: 130px;
+		-webkit-tap-highlight-color: rgba(200, 168, 74, 0.2);
+	}
+
+	div.button:active {
+		background: linear-gradient(to bottom, #2a221a, #1a1612);
+		border-color: #6b5c3e;
+		box-shadow: inset 0 1px 0 rgba(107, 92, 62, 0.4), 0 0 12px rgba(107, 92, 62, 0.2);
+	}
+
+	.menu span {
+		font-size: 18px;
+		padding: 8px 12px;
+	}
+
+	/* 菜单底部居中 */
+	.menu {
+		position: fixed;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+		flex-direction: row;
+		justify-content: center;
+		padding: 4px 0;
+		border-radius: 0;
+		border-left: none;
+		border-right: none;
+		gap: 0;
+		z-index: 100;
+		background: rgba(8, 6, 4, 0.95);
+	}
+
+	.menu span {
+		padding: 4px 6px;
+		font-size: 12px;
+	}
+
+	/* 世界地图 */
+	#worldOuter {
+		max-width: 700px;
+		overflow-x: auto;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	/* 战斗 */
+	#wanderer {
+		left: 10%;
+	}
+
+	#enemy {
+		right: 10%;
+	}
+
+	/* 进度面板 */
+	#progressPanel {
+		width: 90% !important;
+		left: 5% !important;
+		top: 10% !important;
+	}
+
+	/* description textarea */
+	#description textarea {
+		width: 100%;
+		box-sizing: border-box;
+	}
+
+	/* 通知切换按钮也能在 header 中选择 */
+	body.notif-open div#notifications {
+		display: block !important;
+		position: fixed;
+		top: 40px;
+		left: 0;
+		width: 100%;
+		height: auto;
+		max-height: 200px;
+		z-index: 99;
+		overflow-y: auto;
+	}
+
+	body.notif-open div#notifyGradient {
+		display: none;
+	}
+}
+
+@media (max-width: 420px) {
+	div.headerButton {
+		font-size: 11px;
+		margin-left: 4px;
+		padding-left: 4px;
+	}
+
+	.menu span {
+		padding: 3px 4px;
+		font-size: 11px;
+	}
+}
+
+/* Performance optimizations */
+.transition-fast {
+  transition: all 150ms ease;
+}
+
+.transition-normal {
+  transition: all 300ms ease;
+}
+
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+.shadow-soft {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-glow {
+  box-shadow: 0 0 20px rgba(200, 168, 74, 0.3);
+}
+
+/* Visual Polish */
+
+/* Smooth text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Button hover effects enhancement */
+div.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(200, 168, 74, 0.3);
+}
+
+div.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(200, 168, 74, 0.2);
+}
+
+/* Subtle pulse effect for important elements */
+@keyframes gentlePulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.95; }
+}
+
+.pulse-gentle {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+/* Text selection highlighting */
+::selection {
+  background: rgba(200, 168, 74, 0.2);
+  color: #e8dccf;
+}
+
+::-moz-selection {
+  background: rgba(200, 168, 74, 0.2);
+  color: #e8dccf;
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 8, 6, 0.5);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(200, 168, 74, 0.3);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(200, 168, 74, 0.5);
+}
+
+/* Focus indicators for accessibility */
+*:focus {
+  outline: 2px solid rgba(200, 168, 74, 0.8);
+  outline-offset: 2px;
+}
+
+button:focus,
+a:focus {
+  outline: 2px solid #c8b89a;
+  outline-offset: 2px;
+}
+
+/* Text gradients for headings */
+.heading-gradient {
+  background: linear-gradient(135deg, #c8b89a 0%, #e8dccf 50%, #c8b89a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glowing text effect */
+.text-glow {
+  text-shadow: 0 0 10px rgba(200, 168, 74, 0.5);
+}
+
+/* Card-like containers */
+.card {
+  background: rgba(10, 8, 6, 0.8);
+  border: 1px solid #2a221a;
+  border-radius: 8px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover {
+  border-color: #4a3c2e;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+}
+
+/* Icon sizing */
+.icon-small { width: 16px; height: 16px; }
+.icon-medium { width: 24px; height: 24px; }
+.icon-large { width: 32px; height: 32px; }

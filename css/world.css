@@ -1,0 +1,115 @@
+#worldOuter {
+	position: relative;
+	display: inline-block;
+}
+
+#map {
+	position: relative;
+	font-family: "Courier New", Courier, monospace;
+	border: 1px solid black;
+	overflow: hidden;
+	display: inline-block;
+	line-height: 10px;
+	letter-spacing: 1px;
+	color: #999;
+	cursor: default;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#map .landmark {
+	position: relative;
+	font-weight: bold;
+	color: black;
+	line-height: 0px; /* Hack to prevent the boldness from increasing the row's line-height. I hope it works in all browsers... */
+}
+
+#bagspace-world {
+	border: 1px solid black;
+	height: 62px;
+	margin-bottom: 5px;
+	margin-top: 13px;
+	overflow: hidden;
+}
+
+#bagspace-world > div {
+	padding: 6px 4px;
+}
+
+#backpackTitle {
+	position: absolute;
+	top: 0px;
+	left: 10px;
+	background-color: white;
+	z-index: 1;
+}
+
+#backpackSpace {
+	position: absolute;
+	top: 0px;
+	right: 10px;
+	background-color: white;
+	z-index: 1;
+}
+
+#healthCounter {
+	position: absolute;
+	top: 0px;
+	left: 80px;
+	background-color: white;
+	z-index: 1;
+}
+
+div.supplyItem {
+	display: inline-block;
+	border: 1px solid #999;
+	float: left;
+	margin: 0px 5px 6px 0px;
+	padding: 0 5px;
+	cursor: default;
+}
+
+/* 小地图 */
+#miniMap {
+	position: absolute;
+	top: 5px;
+	right: 5px;
+	background: #1a1612;
+	border: 1px solid #4a3a2a;
+	padding: 4px;
+	border-radius: 3px;
+	z-index: 10;
+}
+#miniMapTitle {
+	font-size: 10px;
+	color: #c8a84a;
+	text-align: center;
+	margin-bottom: 2px;
+}
+#miniMapBody {
+	font-family: "Courier New", Courier, monospace;
+	font-size: 8px;
+	line-height: 9px;
+	letter-spacing: 1px;
+	color: #555;
+}
+.mini-player { color: #fff; font-weight: bold; }
+.mini-fog { color: #333; }
+.mini-hotspot { color: #ffcc00; font-weight: bold; }
+.mini-lm { color: #ff6600; }
+#miniMapInfo { font-size: 9px; color: #8a7a5a; margin-top: 3px; text-align: center; }
+
+/* 传送按钮 */
+#teleportBtn {
+	position: absolute;
+	top: 5px;
+	right: 118px;
+	font-size: 10px;
+	padding: 2px 6px;
+	width: auto;
+	z-index: 10;
+}

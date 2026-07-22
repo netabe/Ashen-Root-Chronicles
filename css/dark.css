@@ -1,0 +1,129 @@
+/* Dark mode - WoW aesthetic */
+
+body.noMask {
+	background-color: #060504;
+	background-image: url('../img/background.png');
+	background-size: cover;
+	background-position: center;
+	background-attachment: fixed;
+}
+
+body.noMask div#header {
+	border-bottom-color: #221a14;
+}
+
+body.noMask div.headerButton {
+	color: #7a6a52;
+}
+
+body.noMask div.headerButton:hover {
+	color: #e8d48a;
+}
+
+body.noMask div.headerButton.selected, body.noMask div.headerButton.selected:hover {
+	color: #e8d48a;
+}
+
+body.noMask div#content {
+	border-color: #1a1410;
+	background: rgba(6, 5, 4, 0.85);
+	box-shadow: inset 0 0 80px #000, 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+body.noMask div#notifications div.notification {
+	border-left-color: #4a3a28;
+	background: rgba(8, 6, 4, 0.7);
+	color: #9a8a6a;
+}
+
+body.noMask div#notifyGradient {
+	background-color: #060504;
+	background: -webkit-linear-gradient(
+		rgba(6, 5, 4, 0) 0%, rgba(6, 5, 4, 1) 100%
+	);
+	background: linear-gradient(
+		rgba(6, 5, 4, 0) 0%, rgba(6, 5, 4, 1) 100%
+	);
+}
+
+body.noMask .menu {
+	background: rgba(6, 5, 4, 0.95);
+	border-color: #2a221a;
+}
+
+body.noMask .menu span {
+	color: #7a6a52;
+}
+
+body.noMask .menu span:hover {
+	background: rgba(90, 76, 56, 0.15);
+	color: #e8d48a;
+}
+
+body.noMask div.button {
+	border-color: #2a221a;
+	background: linear-gradient(to bottom, #14100c, #0a0806);
+	color: #a89070;
+}
+
+body.noMask div.button:hover {
+	background: linear-gradient(to bottom, #1a1612, #0e0c0a);
+	border-color: #4a3a28;
+	box-shadow: inset 0 1px 0 rgba(90, 76, 56, 0.2), 0 0 8px rgba(90, 76, 56, 0.1);
+	color: #e0c888;
+}
+
+body.noMask div.button.disabled, body.noMask div.button.disabled:hover {
+	border-color: #1a1410;
+	color: #3a2a1a;
+	background: #060504;
+}
+
+body.noMask div.button div.cooldown {
+	background: linear-gradient(to right, rgba(200, 168, 74, 0.45), rgba(140, 112, 40, 0.3));
+}
+
+body.noMask div.button .cooldownText {
+	color: #ffe;
+}
+
+body.noMask div.tooltip {
+	border-color: #2a221a;
+	background: rgba(6, 5, 4, 0.98);
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.6);
+	color: #a89070;
+}
+
+body.noMask .eventPanel {
+	border-color: #2a221a;
+	box-shadow: 0 8px 40px rgba(0, 0, 0, 0.7), inset 0 0 60px rgba(0, 0, 0, 0.3);
+}
+
+body.noMask #description {
+	color: #a89070;
+}
+
+body.noMask #description textarea {
+	background: rgba(6, 5, 4, 0.9);
+	color: #a89070;
+	border-color: #1a1410;
+}
+
+body.noMask #dropMenu {
+	background: rgba(6, 5, 4, 0.98);
+	border-color: #2a221a;
+	color: #a89070;
+}
+
+body.noMask #dropMenu > div:hover {
+	background: rgba(90, 76, 56, 0.08);
+}
+
+body.noMask #dropMenu:before {
+	color: #e8d48a;
+	border-bottom-color: #2a221a;
+}
+
+body.noMask #lootButtons:before {
+	color: #8a7a50;
+}

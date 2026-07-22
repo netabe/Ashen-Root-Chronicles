@@ -1,0 +1,14 @@
+.button{width: 100px !important;}
+#outsidePanel .button{width: 115px !important;}
+.eventPanel .button {width: 122px !important;}
+
+@media (max-width: 767px) {
+	.button{width: 90px !important;}
+	#outsidePanel .button{width: 100px !important;}
+	.eventPanel .button {width: 45% !important; max-width: 130px;}
+}
+
+@media (max-width: 400px) {
+	.button{width: 80px !important;}
+	#outsidePanel .button{width: 90px !important;}
+}
