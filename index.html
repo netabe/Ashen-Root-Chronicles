@@ -19,19 +19,19 @@
 	<script src="lang/langs.js"></script>
 	
 	<script>
-		// try to read "lang" param's from url
+		var allowedLangs = ['zh_cn','zh_tw','en','cs','de','el','eo','es','fr','gl','id','it','ja','ko','lt_LT','lv','nb','pl','pt','pt_br','ru','sv','th','tr','uk','vi', 'main'];
 		var lang = decodeURIComponent((new RegExp('[?|&]lang=' + '([^&;]+?)(&|#|;|$)').exec(location.search)||[,""])[1].replace(/\+/g, '%20'))||null;
-		// if no language requested, try to read it from local storage
 		if(!lang){
 			try {
 				lang = localStorage.lang;
 			} catch(e) {}
 		}
-		// default to Chinese (zh_cn)
 		if(!lang){
 			lang = 'zh_cn';
 		}
-		// if a language different than english requested, load all translations
+		if(allowedLangs.indexOf(lang) === -1) {
+			lang = 'zh_cn';
+		}
 		if(lang && lang != 'en'){
 			document.write('<script src="lang/'+lang+'/strings.js"><\/script>');
 			document.write('<link rel="stylesheet" type="text/css" href="lang/'+lang+'/main.css" \/>');

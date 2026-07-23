@@ -19,7 +19,7 @@
 
     options: {
       log: false,
-      key: 'q7vyvfsakyfmp3o',
+      key: null, // set via Engine.options.dropboxKey or dropbox.js init
       table: 'adarkroom'
     },
 
@@ -37,7 +37,12 @@
 
       this._log = this.options.log;
 
-      this.client = new Dropbox.Client({key: DropboxConnector.options.key});
+      var dbKey = DropboxConnector.options.key || (Engine.options && Engine.options.dropboxKey);
+      if (!dbKey) {
+        Engine.log('Dropbox: no API key configured, feature disabled');
+        return this;
+      }
+      this.client = new Dropbox.Client({key: dbKey});
       this.connectToDropbox(false);
 
       return this;

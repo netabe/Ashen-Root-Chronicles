@@ -942,12 +942,12 @@ var World = {
               break;
             default:
               if(typeof World.LANDMARKS[c] != 'undefined' && (c != World.TILE.OUTPOST || !World.outpostUsed(i, j))) {
-                mapString += '<span class="landmark">' + c + '<div class="tooltip' + ttClass + '">' + World.LANDMARKS[c].label + '</div></span>';
+                mapString += '<span class="landmark">' + $SM.htmlEscape(c) + '<div class="tooltip' + ttClass + '">' + $SM.htmlEscape(World.LANDMARKS[c].label) + '</div></span>';
               } else {
                 if(c.length > 1) {
                   c = c[0];
                 }
-                mapString += c;
+                mapString += $SM.htmlEscape(c);
               }
               break;
           }

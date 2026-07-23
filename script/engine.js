@@ -6,6 +6,7 @@
     MAX_STORE: 99999999999999,
     SAVE_DISPLAY: 30 * 1000,
     GAME_OVER: false,
+    SAVE_SECRET: 'adr-save-v1-2024',
 
     //object event types
     topics: {},
@@ -294,6 +295,24 @@
       return ( location.search.indexOf( 'ignorebrowser=true' ) < 0 && /Android|webOS|iPhone|iPad|iPod|BlackBerry/i.test( navigator.userAgent ) );
     },
 
+    _computeSig: function(data) {
+      var s = 0;
+      for (var i = 0; i < data.length; i++) {
+        s = (s * 31 + data.charCodeAt(i)) & 0x7FFFFFFF;
+      }
+      return s.toString(16);
+    },
+
+    _verifySave: function(data) {
+      try {
+        var s = JSON.parse(data);
+        if (s && typeof s === 'object' && !Array.isArray(s)) return true;
+        return false;
+      } catch(e) {
+        return false;
+      }
+    },
+
     saveGame: function() {
       if(typeof Storage != 'undefined' && localStorage) {
         if(Engine._saveTimer != null) {
@@ -303,13 +322,29 @@
           $('#saveNotify').css('opacity', 1).animate({opacity: 0}, 1000, 'linear');
           Engine._lastNotify = Date.now();
         }
-        localStorage.gameState = JSON.stringify(State);
+        var json = JSON.stringify(State);
+        var sig = Engine._computeSig(json + Engine.SAVE_SECRET);
+        localStorage.gameState = json + '|sig:' + sig;
       }
     },
 
     loadGame: function() {
       try {
-        var savedState = JSON.parse(localStorage.gameState);
+        var raw = localStorage.gameState || '';
+        var idx = raw.lastIndexOf('|sig:');
+        var json = idx === -1 ? raw : raw.slice(0, idx);
+        var sig = idx === -1 ? '' : raw.slice(idx + 5);
+
+        if (sig && Engine._computeSig(json + Engine.SAVE_SECRET) !== sig) {
+          Engine.log('Save integrity check failed');
+          throw new Error('bad sig');
+        }
+        if (idx === -1 && json.length > 0) {
+          // legacy save without signature, accept but log
+          Engine.log('loaded legacy save (no integrity check)');
+        }
+
+        var savedState = JSON.parse(json);
         if(savedState) {
           State = savedState;
           $SM.updateOldState();
@@ -397,11 +432,10 @@
     },
 
     generateExport64: function(){
-      var string64 = Base64.encode(localStorage.gameState);
+      var raw = localStorage.gameState;
+      var string64 = Base64.encode(raw);
       string64 = string64.replace(/\s/g, '');
-      string64 = string64.replace(/\./g, '');
       string64 = string64.replace(/\n/g, '');
-
       return string64;
     },
 
@@ -415,9 +449,23 @@
       Engine.event('progress', 'import');
       Engine.disableSelection();
       string64 = string64.replace(/\s/g, '');
-      string64 = string64.replace(/\./g, '');
       string64 = string64.replace(/\n/g, '');
       var decodedSave = Base64.decode(string64);
+      if (!Engine._verifySave(decodedSave)) {
+        Engine.log('WARNING: imported data is not valid JSON, rejecting');
+        Events.startEvent({
+          title: _('Import Error'),
+          scenes: {
+            start: {
+              text: [_('the save data is invalid or corrupted.')],
+              buttons: {
+                'ok': { text: _('ok'), nextScene: 'end' }
+              }
+            }
+          }
+        });
+        return;
+      }
       localStorage.gameState = decodedSave;
       location.reload();
     },

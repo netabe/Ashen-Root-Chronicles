@@ -48,45 +48,64 @@ var StateManager = {
 		$.Dispatch('stateUpdate').subscribe($SM.handleStateUpdates);
 	},
 
-	//create all parents and then set state
-	createState: function(stateName, value) {
-		var words = stateName.split(/[.\[\]'"]+/);
-		//for some reason there are sometimes empty strings
-		for (var j = 0; j < words.length; j++) {
-			if (words[j] === '') {
-				words.splice(j, 1);
-				j--;
+	_parsePath: function(stateName) {
+		var segments = [];
+		var i = 0;
+		while (i < stateName.length) {
+			if (stateName[i] === '.' || stateName[i] === '[') {
+				i++;
+				continue;
 			}
+			if (stateName[i] === '"' || stateName[i] === "'") {
+				var quote = stateName[i];
+				var end = stateName.indexOf(quote, i + 1);
+				if (end === -1) break;
+				segments.push(stateName.slice(i + 1, end));
+				i = end + 1;
+				continue;
+			}
+			if (stateName[i] === ']') {
+				i++;
+				continue;
+			}
+			var end = i;
+			while (end < stateName.length && /[^.\['"]/.test(stateName[end])) {
+				end++;
+			}
+			segments.push(stateName.slice(i, end));
+			i = end;
 		}
+		return segments;
+	},
+
+	_getParent: function(stateName, create) {
+		var segments = $SM._parsePath(stateName);
+		if (segments.length === 0) return { obj: null, key: null };
 		var obj = State;
-		var w = null;
-		for(var i=0, len=words.length-1;i<len;i++){
-			w = words[i];
-			if(obj[w] === undefined ) obj[w] = {};
-			obj = obj[w];
+		for (var i = 0; i < segments.length - 1; i++) {
+			if (obj[segments[i]] === undefined) {
+				if (create) obj[segments[i]] = {};
+				else return { obj: null, key: null };
+			}
+			obj = obj[segments[i]];
 		}
-		obj[words[i]] = value;
-		return obj;
+		return { obj: obj, key: segments[segments.length - 1] };
 	},
 
 	//set single state
 	//if noEvent is true, the update event won't trigger, useful for setting multiple states first
 	set: function(stateName, value, noEvent) {
-		var fullPath = $SM.buildPath(stateName);
-
 		//make sure the value isn't over the engine maximum
 		if(typeof value == 'number' && value > $SM.MAX_STORE) value = $SM.MAX_STORE;
 
-		try{
-			eval('('+fullPath+') = value');
-		} catch (e) {
-			//parent doesn't exist, so make parent
-			$SM.createState(stateName, value);
-		}
+		var parent = $SM._getParent(stateName, true);
+		if (parent.obj === null) return;
+		parent.obj[parent.key] = value;
 
 		//stores values can not be negative
 		if(stateName.indexOf('stores') === 0 && $SM.get(stateName, true) < 0) {
-			eval('('+fullPath+') = 0');
+			parent = $SM._getParent(stateName, true);
+			if (parent.obj !== null) parent.obj[parent.key] = 0;
 			Engine.log('WARNING: state:' + stateName + ' can not be a negative value. Set to 0 instead.');
 		}
 
@@ -98,8 +117,6 @@ var StateManager = {
 
 	//sets a list of states
 	setM: function(parentName, list, noEvent) {
-		$SM.buildPath(parentName);
-
 		//make sure the state exists to avoid errors,
 		if($SM.get(parentName) === undefined) $SM.set(parentName, {}, true);
 
@@ -116,12 +133,8 @@ var StateManager = {
 	//shortcut for altering number values, return 1 if state wasn't a number
 	add: function(stateName, value, noEvent) {
 		var err = 0;
-		//0 if undefined, null (but not {}) should allow adding to new objects
-		//could also add in a true = 1 thing, to have something go from existing (true)
-		//to be a count, but that might be unwanted behavior (add with loose eval probably will happen anyways)
 		var old = $SM.get(stateName, true);
 
-		//check for NaN (old != old) and non number values
 		if(old != old){
 			Engine.log('WARNING: '+stateName+' was corrupted (NaN). Resetting to 0.');
 			old = 0;
@@ -130,7 +143,7 @@ var StateManager = {
 			Engine.log('WARNING: Can not do math with state:'+stateName+' or value:'+value+' because at least one is not a number.');
 			err = 1;
 		} else {
-			$SM.set(stateName, old + value, noEvent); //setState handles event and save
+			$SM.set(stateName, old + value, noEvent);
 		}
 
 		return err;
@@ -140,7 +153,6 @@ var StateManager = {
 	addM: function(parentName, list, noEvent) {
 		var err = 0;
 
-		//make sure the parent exists to avoid errors
 		if($SM.get(parentName) === undefined) $SM.set(parentName, {}, true);
 
 		for(var k in list){
@@ -156,34 +168,27 @@ var StateManager = {
 
 	//return state, undefined or 0
 	get: function(stateName, requestZero) {
-		var whichState = null;
-		var fullPath = $SM.buildPath(stateName);
-
-		//catch errors if parent of state doesn't exist
-		try{
-			eval('whichState = ('+fullPath+')');
-		} catch (e) {
-			whichState = undefined;
+		var parent = $SM._getParent(stateName, false);
+		if (parent.obj === null) {
+			if (requestZero) return 0;
+			return undefined;
 		}
-
-		//prevents repeated if undefined, null, false or {}, then x = 0 situations
+		var whichState = parent.obj[parent.key];
 		if((!whichState || whichState == {}) && requestZero) return 0;
-		else return whichState;
+		return whichState;
 	},
 
-	//mainly for local copy use, add(M) can fail so we can't shortcut them
-	//since set does not fail, we know state exists and can simply return the object
+	//mainly for local copy use
 	setget: function(stateName, value, noEvent){
 		$SM.set(stateName, value, noEvent);
-		return eval('('+$SM.buildPath(stateName)+')');
+		return $SM.get(stateName);
 	},
 
 	remove: function(stateName, noEvent) {
-		var whichState = $SM.buildPath(stateName);
-		try{
-			eval('(delete '+whichState+')');
-		} catch (e) {
-			//it didn't exist in the first place
+		var parent = $SM._getParent(stateName, false);
+		if (parent.obj !== null && parent.key !== null) {
+			delete parent.obj[parent.key];
+		} else {
 			Engine.log('WARNING: Tried to remove non-existant state \''+stateName+'\'.');
 		}
 		if(!noEvent){
@@ -427,6 +432,11 @@ var StateManager = {
 		case 'building':
 			return $SM.get('game.buildings["'+name+'"]', true);
 		}
+	},
+
+	htmlEscape: function(str) {
+		if (typeof str !== 'string') return str;
+		return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 	},
 
 	handleStateUpdates: function(e){
