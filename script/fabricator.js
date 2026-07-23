@@ -116,11 +116,11 @@ const Fabricator = {
     Engine.updateSlider();
     Fabricator.updateBuildButtons();
 
-    // 聚宝仙盆复制按钮
+    // 灰烬熔炉复制按钮
     if (!$('#duplicateButton').length) {
       new Button.Button({
         id: 'duplicateButton',
-        text: '聚宝仙盆·复制',
+        text: '灰烬熔炉·复制',
         click: Fabricator.duplicateResource,
         width: '150px',
         cost: { 'alien alloy': 1 }
@@ -297,7 +297,7 @@ const Fabricator = {
 
     $SM.set('stores["alien alloy"]', alloy - 1);
     $SM.add('stores["' + target.key + '"]', duped);
-    Notifications.notify(Fabricator, '聚宝仙盆复制了 ' + duped + ' ' + target.name + '！');
+    Notifications.notify(Fabricator, '灰烬熔炉复制了 ' + duped + ' ' + target.name + '！');
   }
 
 };

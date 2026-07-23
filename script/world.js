@@ -1027,7 +1027,7 @@ var World = {
         $SM.addPerk('mixedRoot4');
         $('body').addClass('cultivation-breakthrough');
         setTimeout(function() { $('body').removeClass('cultivation-breakthrough'); }, 1500);
-        Notifications.notify(null, '击败太虚老祖！杂灵根天赋"万法归一"觉醒，聚宝仙盆产生共鸣。');
+        Notifications.notify(null, '击败太虚老祖！杂灵根天赋"万法归一"觉醒，灰烬熔炉产生共鸣。');
       }
     }
     World.redeemBlueprints();
